@@ -1,6 +1,5 @@
 # Place this file in the root of your CIRCUITPY drive
-# uncomment the controller you plan on using it should match the 
-# one used in boot.py
+# uncomment the controller you plan on using
 
 from controllers import wii_classic_controller
 # from controllers import wii_nunchuk
