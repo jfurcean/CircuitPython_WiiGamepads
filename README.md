@@ -17,4 +17,5 @@ from controllers import wii_classic_controller
 # from controllers import wii_nunchuk
 # from controllers import wii_nes
 # from controllers import wii_guitar
+# from controllers import wii_drums
 ```
