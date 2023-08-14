@@ -50,8 +50,8 @@ class Gamepad:
         # Store settings separately before putting into report. Saves code
         # especially for buttons.
         self._buttons_state = 0
-        self._joysticks = [[0,0],[0,0]]
-        self._analog = [0,0]
+        self._joysticks = [[0, 0], [0, 0]]
+        self._analog = [0, 0]
 
         # Send an initial report to test if HID device is ready.
         # If not, wait a bit and try once more.
@@ -119,8 +119,8 @@ class Gamepad:
     def reset_all(self):
         """Release all buttons and set joysticks to zero."""
         self._buttons_state = 0
-        self._joysticks = [[0,0],[0,0]]
-        self._analogs = [0,0]
+        self._joysticks = [[0, 0], [0, 0]]
+        self._analogs = [0, 0]
         self._send(always=True)
 
     def _send(self, always=False):
@@ -137,7 +137,7 @@ class Gamepad:
             self._joysticks[1][0],
             self._joysticks[1][1],
             self._analogs[0],
-            self._analogs[1]
+            self._analogs[1],
         )
 
         if always or self._last_report != self._report:

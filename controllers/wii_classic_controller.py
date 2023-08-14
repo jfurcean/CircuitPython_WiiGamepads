@@ -12,10 +12,9 @@ from wiichuck.classic_controller import ClassicController
 
 
 def map_buttons(buttons, dpad):
-
     # mapped buttons so they work appropriately with https://gamepad-tester.com/
 
-    buttons_mapped=[0]*16
+    buttons_mapped = [0] * 16
 
     buttons_mapped[0] = buttons.B
     buttons_mapped[1] = buttons.A
@@ -34,9 +33,7 @@ def map_buttons(buttons, dpad):
     buttons_mapped[14] = dpad.left
     buttons_mapped[15] = dpad.right
 
-
     return buttons_mapped
-
 
 
 gp = Gamepad(usb_hid.devices)
@@ -44,13 +41,12 @@ controller = ClassicController(board.STEMMA_I2C())
 
 
 while True:
-
     joysticks, buttons, dpad, triggers = controller.values
 
-    buttons_mapped = map_buttons(buttons,dpad)
+    buttons_mapped = map_buttons(buttons, dpad)
 
     for i, button in enumerate(buttons_mapped):
-        gamepad_button_num = i+1
+        gamepad_button_num = i + 1
         if button:
             gp.press_buttons(gamepad_button_num)
             # print(" press", gamepad_button_num, end="")
@@ -58,24 +54,20 @@ while True:
             gp.release_buttons(gamepad_button_num)
             # print(" release", gamepad_button_num, end="")
 
-    gp.move_joystick(index = 0,
+    gp.move_joystick(
+        index=0,
         x=int(map_range(joysticks.lx, 0, 63, -127, 127)),
         y=int(map_range(joysticks.ly, 0, 63, -127, 127)),
     )
 
-    gp.move_joystick(index =1,
+    gp.move_joystick(
+        index=1,
         x=int(map_range(joysticks.rx, 0, 31, -127, 127)),
         y=int(map_range(joysticks.ry, 0, 31, -127, 127)),
     )
 
-    gp.move_analog(
-        index = 0,
-        value=int(map_range(triggers.left, 0, 31, 0, 127))
-    )
-    gp.move_analog(
-        index=1, 
-        value=int(map_range(triggers.right, 0, 31, 0, 127))
-    )
+    gp.move_analog(index=0, value=int(map_range(triggers.left, 0, 31, 0, 127)))
+    gp.move_analog(index=1, value=int(map_range(triggers.right, 0, 31, 0, 127)))
 
-    #print(f"lx:{joysticks.lx} ly:{joysticks.ly} rx:{joysticks.rx} ry:{joysticks.ry}")
-    #print(f"trigger.left:{trigger.left} trigger.right:{trigger.right}")
+    # print(f"lx:{joysticks.lx} ly:{joysticks.ly} rx:{joysticks.rx} ry:{joysticks.ry}")
+    # print(f"trigger.left:{trigger.left} trigger.right:{trigger.right}")

@@ -10,11 +10,11 @@ from adafruit_simplemath import map_range
 from hid_gamepad import Gamepad
 from wiichuck.nunchuk import Nunchuk
 
-def map_buttons(buttons):
 
+def map_buttons(buttons):
     # mapped buttons so they work appropriately with https://gamepad-tester.com/
 
-    buttons_mapped=[0]*16
+    buttons_mapped = [0] * 16
 
     buttons_mapped[0] = buttons.C
     buttons_mapped[1] = buttons.Z
@@ -29,13 +29,12 @@ controller = Nunchuk(board.STEMMA_I2C())
 
 
 while True:
-
     joystick, buttons, _ = controller.values
 
     buttons_mapped = map_buttons(buttons)
 
     for i, button in enumerate(buttons_mapped):
-        gamepad_button_num = i+1
+        gamepad_button_num = i + 1
         if button:
             gp.press_buttons(gamepad_button_num)
             # print(" press", gamepad_button_num, end="")
@@ -43,10 +42,8 @@ while True:
             gp.release_buttons(gamepad_button_num)
             # print(" release", gamepad_button_num, end="")
 
-
-
-    gp.move_joystick(index=0,
+    gp.move_joystick(
+        index=0,
         x=int(map_range(joystick.x, 0, 255, -127, 127)),
         y=int(map_range(joystick.y, 0, 255, -127, 127)),
     )
-
